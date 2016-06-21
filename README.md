@@ -1,4 +1,4 @@
-lab6
+Lab 5
 ====
 
-Lab 6: AJAX
+Lab 5: Putting it together

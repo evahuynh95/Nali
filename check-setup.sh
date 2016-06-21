@@ -11,23 +11,22 @@ heroku_missing="0"
 npm_missing="0"
 
 # set this to the number of the current lab
-cur_lab=6
+cur_lab=5
 
 system=$(uname -a | cut -d' ' -f1,2)
 if [ "$system" == "Linux precise32" ] || [ "$system" == "Linux vagrant-ubuntu-trusty-64" ]
 then
   sys_vagrant="1"  
   echo "Running on Vagrant guest"
-  
+
   user=$(whoami)
-  
+
   if [ "$user" != "root" ]
   then
-    echo "ERROR: You must run this script with sudo. Enter the following and hit enter."
-    echo "sudo bash lab6/check-setup.sh"
+    echo "ERROR: You must run this script with sudo"
     exit
   fi
-  
+
 elif [ $short_system == "Darwin"  ]
 then
   sys_osx="1"
@@ -67,7 +66,7 @@ then
       fi
     fi
   done
-  
+
   if [ "$mongo_missing" == "1" ]
   then
     echo "Installing MongoDB..."
@@ -80,12 +79,8 @@ then
     else
         echo "Auto install succeeded"
     fi
-  else
-    echo "Ensuring mongo data directory is set up."
-      mkdir -p /data/db;
-    chown vagrant /data/db;
   fi
-  
+
   if [ "$heroku_missing" == "1" ]
   then
     heroku_res=$(echo "Installing Heroku Toolbelt...";
@@ -98,7 +93,7 @@ then
         echo "Auto install succeeded"
     fi
   fi
-  
+
   if [ "$node_missing" == "1" ]
   then
     echo "Installing nodejs"    
@@ -111,7 +106,7 @@ then
         echo "Auto install succeeded"
     fi
   fi
-  
+
   if [ "$npm_missing" == "1" ]
   then
     echo "Installing npm"  
@@ -132,28 +127,15 @@ then
   then
     echo "FAIL: Node is missing packages"
     echo "Attempting to repair."
-    install_status=$(cd lab6; npm -y install --no-bin-links)
+    /home/vagrant/introHCI/npm.sh
+    install_status=$(cd lab4; npm -y install --no-bin-links)
 
-    node_status=$(cd lab6;npm ls 2>&1)
-  
+    node_status=$(cd lab4;npm ls 2>&1)
+
     if [[ $node_status != *"UNMET DEPENDENCY"* ]]
     then
       echo "PASS: Repair successful. All node packages installed."
     fi
-  fi
-
-  # change ssh timeout to fix disconnect issues
-
-  ssh_result=$(grep "Setup SSH timeouts" /etc/ssh/sshd_config | wc -l | xargs)
-
-  if [ $ssh_result != "1" ]
-  then
-    echo "Patching ssh timeout configuration."
-
-    echo -e "\n# Setup SSH timeouts\nClientAliveInterval 30\nClientAliveCountMax 4" >> /etc/ssh/sshd_config 
-    echo -e "\n# Setup SSH timeouts\nServerAliveInterval 30\nServerAliveCountMax 4" >> /etc/ssh/ssh_config 
-    /etc/init.d/ssh restart > /dev/null
-
   fi
 
   if [ $all_present == "1" ]
@@ -190,21 +172,21 @@ else
     fi
   fi
 
-  
+
   vagrant_check=$(grep MSB Vagrantfile | wc -l | xargs)
 
   if [ $vagrant_check == "4" ]
   then
     echo "PASS: You are using the correct Vagrantfile"
   else
-    echo "FAIL: CSE170 Vagrantfile not found. Are you running this in the introHCI directory?"
+    echo "FAIL: CS147 Vagrantfile not found. Are you running this in the introHCI directory?"
   fi
 
   missing_dirs="0"
   hcidirs=$(ls)
 
   # current lab hardcoded
-  for i in {1..6} 
+  for i in {1..4} 
   do
     target_dir="lab$i"
   if [[ $hcidirs == *"$target_dir"* ]]
