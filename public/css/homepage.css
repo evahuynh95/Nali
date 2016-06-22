@@ -1,0 +1,61 @@
+/* applies to anything of class "example-class-selector" */
+.example-class-selector {
+	margin-top: 2em;
+}
+
+/* applies to any <p> descendants of an element of class "example-class-selector" */
+.example-class-selector p {
+	/* Colors are in hexadecimal: http://www.colorpicker.com/ */	
+	color: #CC00AA;
+}
+
+.topbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
+}
+
+h1 {
+	text-align: center;
+	margin-top: 5%;
+}
+
+button {
+	margin-top: 5%;
+}
+
+#contactUsBtn {
+	margin-bottom: 10%;
+}
+
+#contactUs {
+	float: right;
+}
+
+.left-div {
+	text-align: center;
+	margin-left: 10%;
+}
+
+#copyright {
+	text-align: center;
+}
