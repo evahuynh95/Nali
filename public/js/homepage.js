@@ -1,3 +1,6 @@
+// MOCK UP .JS file for the homepage. Not yet modified.
+
+
 'use strict';
 
 // Call this function when the page loads (the "ready" event)

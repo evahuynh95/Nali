@@ -36,18 +36,16 @@ li a:hover {
 
 h1 {
 	text-align: center;
-	margin-top: 5%;
+	margin-top: 3%;
+    margin-bottom: 3%;
 }
 
 button {
 	margin-top: 5%;
 }
 
-#contactUsBtn {
-	margin-bottom: 10%;
-}
 
-#contactUs {
+.social_media {
 	float: right;
 }
 
